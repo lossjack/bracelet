@@ -66,3 +66,4 @@
 .\objects\main.o: ..\Mycode\max30102.h
 .\objects\main.o: ..\FreeRTOS\include\semphr.h
 .\objects\main.o: ..\FreeRTOS\include\queue.h
+.\objects\main.o: ..\Library\inc\sys.h

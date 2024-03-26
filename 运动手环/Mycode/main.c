@@ -28,6 +28,7 @@
 #include "rtc.h"
 #include "iic2.h"
 #include "semphr.h"
+#include "sys.h"
 
 
 uint32_t aun_ir_buffer[500]; 
@@ -48,13 +49,17 @@ static TaskHandle_t AppTask_Handle = NULL;//定义记录任务信息的结构体  注意不要定
 static TaskHandle_t AppTask_Handle1 = NULL;
 static TaskHandle_t AppTask_Handle2 = NULL;
 static TaskHandle_t AppTask_Handle3 = NULL;
+static TaskHandle_t AppTask_Handle4 = NULL;/*蓝牙*/
+
 
 SemaphoreHandle_t xMutex;
 
 char setclock2[7]={0};
 int flagi=0;
 
-
+u32 hour=19;
+u32 minute=7;
+u32 second=0;
 
 
 //任务子函数
@@ -128,6 +133,22 @@ static void AppTask(void* parameter)
     }
 }
 
+void Oled_show_clock(){
+	RTC_TimeTypeDef RTC_TimeStruct; // 用于存储RTC的时间
+	RTC_DateTypeDef RTC_DateStruct; // 用于存储日期信息
+	RTC_GetDate(RTC_Format_BIN, &RTC_DateStruct); // 获取当前的日期信息
+	RTC_GetTime(RTC_Format_BIN, &RTC_TimeStruct); // 获取当前的时间信息
+
+	u8 t = 0;
+	u8 tbuf_clock[80]={0}; // 用于存储格式化后的时间和日期字符串
+	
+	OLED_Fill(0x00);//先清屏;
+	sprintf((char *)tbuf_clock, "20%02d-%02d-%02d %02d:%02d:%02d",RTC_DateStruct.RTC_Year, RTC_DateStruct.RTC_Month, RTC_DateStruct.RTC_Date, hour%24, minute%60, second%60);
+	
+	OLED_ShowLChar(34,0,"set-clock"); 
+	OLED_ShowLChar(0,3,(char*)tbuf_clock);
+	vTaskDelay(100);
+}
 
 //任务子函数
 static void AppTask1(void* parameter)
@@ -411,6 +432,50 @@ static void AppTask3(void* parameter)
 
 }
 
+uint16_t uart1_recv_data;
+
+static void AppTask4(void* parameter)
+{
+	while(1)
+	{
+		if(uart1_recv_data == '0')
+        {
+			PEout(13) = ~PEout(13);
+			uart1_recv_data = 4;
+        }
+        if(uart1_recv_data == '1')
+        {	
+			PEout(13) =1;
+        }
+        if(uart1_recv_data == '5')
+        {	
+			hour++;
+			uart1_recv_data = 4;
+			OLED_Fill(0x00);//先清屏
+			Oled_show_clock();
+        }
+		if(uart1_recv_data == '6')
+        {	
+			minute++;
+			uart1_recv_data = 4;
+			OLED_Fill(0x00);//先清屏
+			Oled_show_clock();
+        }
+		if(uart1_recv_data == '7')
+        {	
+			second++;
+			uart1_recv_data = 4;
+			OLED_Fill(0x00);//先清屏
+			Oled_show_clock();
+        }
+		if(uart1_recv_data == '8')
+        {	
+			PFout(8) = ~PFout(8) ;
+			uart1_recv_data = 4;
+        }
+		delay_ms(100);
+	}
+}
 
 
 void USART2_IRQHandler(void)

@@ -30,38 +30,44 @@ Build target 'first'
 compiling main.c...
 ..\Mycode\iic2.h(30): warning:  #1-D: last line of file ends without a newline
   #endif
-..\Mycode\main.c(137): warning:  #177-D: variable "x"  was declared but never referenced
+..\Mycode\main.c(142): warning:  #177-D: variable "t"  was declared but never referenced
+  	u8 t = 0;
+..\Mycode\main.c(158): warning:  #177-D: variable "x"  was declared but never referenced
   	short x,y,z;
-..\Mycode\main.c(137): warning:  #177-D: variable "y"  was declared but never referenced
+..\Mycode\main.c(158): warning:  #177-D: variable "y"  was declared but never referenced
   	short x,y,z;
-..\Mycode\main.c(137): warning:  #177-D: variable "z"  was declared but never referenced
+..\Mycode\main.c(158): warning:  #177-D: variable "z"  was declared but never referenced
   	short x,y,z;
-..\Mycode\main.c(138): warning:  #177-D: variable "Gx"  was declared but never referenced
+..\Mycode\main.c(159): warning:  #177-D: variable "Gx"  was declared but never referenced
   	float Gx,Gy,Gz;
-..\Mycode\main.c(138): warning:  #177-D: variable "Gy"  was declared but never referenced
+..\Mycode\main.c(159): warning:  #177-D: variable "Gy"  was declared but never referenced
   	float Gx,Gy,Gz;
-..\Mycode\main.c(138): warning:  #177-D: variable "Gz"  was declared but never referenced
+..\Mycode\main.c(159): warning:  #177-D: variable "Gz"  was declared but never referenced
   	float Gx,Gy,Gz;
-..\Mycode\main.c(183): warning:  #177-D: variable "temp_num"  was declared but never referenced
+..\Mycode\main.c(204): warning:  #177-D: variable "temp_num"  was declared but never referenced
   	u8 temp_num=0;
-..\Mycode\main.c(185): warning:  #177-D: variable "str"  was declared but never referenced
+..\Mycode\main.c(206): warning:  #177-D: variable "str"  was declared but never referenced
   	u8 str[100];
-..\Mycode\main.c(186): warning:  #550-D: variable "dis_hr"  was set but never used
+..\Mycode\main.c(207): warning:  #550-D: variable "dis_hr"  was set but never used
   	u8 dis_hr=0,dis_spo2=0;
-..\Mycode\main.c(186): warning:  #550-D: variable "dis_spo2"  was set but never used
+..\Mycode\main.c(207): warning:  #550-D: variable "dis_spo2"  was set but never used
   	u8 dis_hr=0,dis_spo2=0;
-..\Mycode\main.c(187): warning:  #177-D: variable "string"  was declared but never referenced
+..\Mycode\main.c(208): warning:  #177-D: variable "string"  was declared but never referenced
   	char string[100];
-..\Mycode\main.c(395): warning:  #192-D: unrecognized character escape sequence
+..\Mycode\main.c(416): warning:  #192-D: unrecognized character escape sequence
   		printf("%f\t%f\t\%f\r\n",Gx,Gy,Gz);
-..\Mycode\main.c(367): warning:  #177-D: variable "ledflag"  was declared but never referenced
+..\Mycode\main.c(388): warning:  #177-D: variable "ledflag"  was declared but never referenced
   	int ledflag =0;  //0Ãð  1ÁÁ
-..\Mycode\main.c(370): warning:  #177-D: variable "step"  was declared but never referenced
+..\Mycode\main.c(391): warning:  #177-D: variable "step"  was declared but never referenced
   	unsigned long step=0;
-..\Mycode\main.c: 15 warnings, 0 errors
+..\Mycode\main.c(52): warning:  #177-D: variable "AppTask_Handle4"  was declared but never referenced
+  static TaskHandle_t AppTask_Handle4 = NULL;/*À¶ÑÀ*/
+..\Mycode\main.c(437): warning:  #177-D: function "AppTask4"  was declared but never referenced
+  static void AppTask4(void* parameter)
+..\Mycode\main.c: 18 warnings, 0 errors
 linking...
-Program Size: Code=31928 RO-data=4728 RW-data=248 ZI-data=88672  
-".\Objects\project.axf" - 0 Error(s), 15 Warning(s).
+Program Size: Code=31928 RO-data=4728 RW-data=260 ZI-data=88672  
+".\Objects\project.axf" - 0 Error(s), 18 Warning(s).
 
 <h2>Software Packages used:</h2>
 
